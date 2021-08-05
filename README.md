@@ -1,7 +1,7 @@
 ![Docker Hub](https://img.shields.io/badge/Capstone%20Project-Data%20Engineering-lightgrey?style=for-the-badge&logo=appveyor)
 # Zomato Sales & Rating Data Warehouse
 
-The goal of this project was to create a robust, feature-packed Data Warehouse by  using all the techiniques learnt in Udacity's Data Engineering Nanodegree program. This project underscores almost all the major components of the aforementioned degree. The dataset for this project can be found from here [link](https://www.kaggle.com/himanshupoddar/zomato-bangalore-restaurants). A light and altered version of this dataset is available here for a quick peak where the column names have been eased.
+The goal of this project was to create a robust, feature-packed Data Warehouse by  using all the techiniques learnt in Udacity's Data Engineering Nanodegree program. This project underscores almost all the major components of the aforementioned degree. The dataset for this project can be found from this [link](https://www.kaggle.com/himanshupoddar/zomato-bangalore-restaurants). A light and altered version of this dataset is available here for a quick peak where the column names have been eased.
 
 ![zomato](https://cityspideynews.s3.amazonaws.com/uploads/spidey/202104/zomato-1619519108.png)
 
