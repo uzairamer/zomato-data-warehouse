@@ -1,9 +1,16 @@
+
+
 ![Docker Hub](https://img.shields.io/badge/Capstone%20Project-Data%20Engineering-lightgrey?style=for-the-badge&logo=appveyor)
 # Zomato Sales & Rating Data Warehouse
 
 The goal of this project was to create a robust, feature-packed Data Warehouse by  using all the techiniques learnt in Udacity's Data Engineering Nanodegree program. This project underscores almost all the major components of the aforementioned degree. The dataset for this project can be found from this [link](https://www.kaggle.com/himanshupoddar/zomato-bangalore-restaurants). A light and altered version of this dataset is available here for a quick peak where the column names have been eased.
 
 ![zomato](https://cityspideynews.s3.amazonaws.com/uploads/spidey/202104/zomato-1619519108.png)
+### Scope of the Project
+The current project can be used to track the aggregate and average rating of any individual restaurant. On what rating people are spending average amount of money. This analysis can help businesses to take informed decisions and adopt strategies based on the results.
+
+The data can be used by business analysts to help in deciding the strategies. By chefs, what dishes are being more liked. The aspiring entrepreneurs, which type of restaurants are performing well and what should be their new restaurant type if they want to open one.
+
 
 To yield better understanding, I'll be walking you through each and every step.
 ### Architecture
@@ -64,7 +71,6 @@ root
 |-- dish_liked: VARCHAR(512)
 |-- url: VARCHAR(2048)
 ~~~~
-partitionBy("year", "artist_id")
 
 ##### TABLE ratings
 
@@ -89,6 +95,12 @@ root
 |-- sale_id: INT4
 |-- cost: NUMERIC
 ~~~~
+
+### ERD
+![erd](https://imgur.com/kJOQGNr.png)
+
+#### About the schema
+The initial staging has all the `VARCHAR` fields because data is in crude form. For example, the rating was present as `4.1/5` so we extracted the proper rating with the help of our SQL. One noteworthy thing, the column names were a bit difficult to comprehend by the database so we normalised them by preprocessing it. Some column names had special characters and spacing
 
 --------------------------------------------
 ### How to run the project?
@@ -120,10 +132,16 @@ The successful run of DAG looks like the following:
 ### Scenarios
 - ####  If the data was increased by 100x.
 	- Sounds like a perfect job for Spark because of its distributed architecture. It can handle it without sweating
+	- We can introduce EMRs to handle large amounts of data with a fully organized ecosystem. The Amazon S3 can be deployed to handle very large amounts of data.
+	- Partitioning can be helpful but we are seeing that we don't have very large updates happening at a single time or any table has larger number of records than any other table so partitioning might be suitable right away.
 - ####  If the pipelines were run on a daily basis by 7am.
-	- This can easily be handled by using Apache Airflow and setting a daily interval to 7 AM. We can also provide a crontab syntax of `0 7 * * *`
+	- This can easily be handled by using Apache Airflow and setting a daily interval to 7 AM. We can also provide a crontab syntax of `0 7 * * *` in the `schedule_interval` argument of the `DAG`
+	- This can definitely increase the operational costs. Since we are using Amazon, managing the resources won't be an issue on our side but it bills will hike
+	- It is a good idea to have a separate instance for Airflow so if it fails, it doesn't effect any other of our business processes
 - #### If the database needed to be accessed by 100+ people
 	- We can tackle this problem with Amazon Redshift due to its nature. Amazon guranatees its high availability, fault taulerant and accessibility. Moreover, we can use Hive as well.
+	- Although, Redshift can be used by upto 100 people at max to access the snapshots. We can manage the query time of multiple people and this can also be taken care of
+	- Since more people are using the accounts, this will definitely hike our bill too. But the cost is justified because handling all this infrastructure on-premises would be much more costly.
 
 
 Thank you so much. It was a wonderful experience.
