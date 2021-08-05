@@ -92,7 +92,6 @@ root
 |-- restaurant_id: INT4
 |-- rating_id: INT4
 |-- order_id: INT4
-|-- sale_id: INT4
 |-- cost: NUMERIC
 ~~~~
 
